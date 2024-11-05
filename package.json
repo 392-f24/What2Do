@@ -1,7 +1,19 @@
 {
+  "name": "what2do",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
   "dependencies": {
     "firebase": "^11.0.1",
     "firebase-tools": "^13.23.0",
-    "react-router-dom": "^6.27.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.27.0",
+    "react-scripts": "5.0.1"
   }
 }
