@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
     Card, 
@@ -11,8 +11,9 @@ import {
 import { MapPin, Calendar, ArrowRight, Clock, Trash} from "lucide-react";
 
 export function TripCard({ trip, tripId, rec, onDelete}) {
-  const navigate = useNavigate()
-  const getRandomGradient = () => {
+  const navigate = useNavigate();
+  
+  const gradient = useMemo(() => {
     const gradients = [
       'from-blue-500 to-purple-500',
       'from-green-400 to-blue-500',
@@ -21,7 +22,7 @@ export function TripCard({ trip, tripId, rec, onDelete}) {
       'from-indigo-500 to-blue-500'
     ];
     return gradients[Math.floor(Math.random() * gradients.length)];
-  };
+  }, [tripId]);
 
   const handleViewItinerary = () => {
     console.log('navigating...')
@@ -31,7 +32,7 @@ export function TripCard({ trip, tripId, rec, onDelete}) {
   return (
     rec ? (
       <Card className="w-full min-w-80 bg-white rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 border border-gray-100">
-        <div className={`h-20 bg-gradient-to-r ${getRandomGradient()} p-6`}>
+        <div className={`h-20 bg-gradient-to-r ${gradient} p-6`}>
           <div className="flex items-start justify-between">
             <div className="bg-white/20 rounded-lg px-3 py-1 text-white text-sm font-medium">
               {trip.days} Days
@@ -61,7 +62,7 @@ export function TripCard({ trip, tripId, rec, onDelete}) {
       </Card>
     ) : (
       <Card className="w-full min-w-80 bg-white rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 border border-gray-100">
-        <div className={`h-32 bg-gradient-to-r ${getRandomGradient()} p-6`}>
+        <div className={`h-32 bg-gradient-to-r ${gradient} p-6`}>
           <div className="flex items-start justify-between">
             <div className="bg-white/20 backdrop-blur-md rounded-lg px-3 py-1 text-white text-sm font-medium">
               {trip.days} Days
