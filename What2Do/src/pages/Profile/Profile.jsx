@@ -80,9 +80,9 @@ export function Profile () {
           <div className="relative">
             <div className="overflow-x-auto pb-4 -mx-4 px-4">
               <div className="flex gap-2 sm:gap-4">
-                {Object.entries(recs.trips).map(([tripName, tripData]) => (
-                  <div key={tripName} className="w-80 flex-shrink-0">
-                    <TripCard trip={tripData} rec={1} tripName={tripName} />
+                {Object.entries(recs.trips).map(([tripId, tripData]) => (
+                  <div key={tripId} className="w-80 flex-shrink-0">
+                    <TripCard trip={tripData} tripId={tripId} rec={1} />
                   </div>
                 ))}
               </div>
@@ -103,9 +103,9 @@ export function Profile () {
             </Link>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            {Object.entries(data.trips).map(([tripName, tripData]) => (
-              <div key={tripName} className="transform transition-all hover:scale-[1.02]">
-                <TripCard trip={tripData} tripName={tripName} />
+            {Object.entries(data.trips).map(([tripId, tripData]) => (
+              <div key={tripId} className="transform transition-all hover:scale-[1.02]">
+                <TripCard trip={tripData} tripId={tripId}/>
               </div>
             ))}
           </div>

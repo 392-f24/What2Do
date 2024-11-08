@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { 
     Card, 
     CardHeader, 
@@ -9,7 +10,8 @@ import {
 } from './Card';
 import { MapPin, Calendar, ArrowRight, Clock } from "lucide-react";
 
-export function TripCard({ trip, tripName, rec }) {
+export function TripCard({ trip, tripId, rec }) {
+  const navigate = useNavigate()
   const getRandomGradient = () => {
     const gradients = [
       'from-blue-500 to-purple-500',
@@ -19,6 +21,11 @@ export function TripCard({ trip, tripName, rec }) {
       'from-indigo-500 to-blue-500'
     ];
     return gradients[Math.floor(Math.random() * gradients.length)];
+  };
+
+  const handleViewItinerary = () => {
+    console.log('navigating...')
+    navigate(`/itinerary/${tripId}`);
   };
 
   return (
@@ -32,18 +39,20 @@ export function TripCard({ trip, tripName, rec }) {
           </div>
         </div>
         <CardHeader className="pt-4">
-          <CardTitle className="text-xl font-bold text-gray-900">{tripName}</CardTitle>
+          <CardTitle className="text-xl font-bold text-gray-900">
+            {trip.tripName.length > 35 ? `${trip.tripName.slice(0, 35)}...` : trip.tripName}
+          </CardTitle>
           <CardDescription className="flex items-center gap-1 text-gray-500">
             <Clock className="w-4 h-4" />
             <span>{trip.days} Days of Adventure</span>
           </CardDescription>
         </CardHeader>
         <CardFooter className="flex items-center justify-between pb-4">
-          <a href={trip.source} 
+          <button onClick={handleViewItinerary}
              className="group flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors">
             View Itinerary
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </a>
+          </button>
         </CardFooter>
       </Card>
     ) : (
@@ -56,7 +65,9 @@ export function TripCard({ trip, tripName, rec }) {
           </div>
         </div>
         <CardHeader className="pt-4">
-          <CardTitle className="text-xl font-bold text-gray-900">{tripName}</CardTitle>
+          <CardTitle className="text-xl font-bold text-gray-900">
+            {trip.tripName.length > 35 ? `${trip.tripName.slice(0, 35)}...` : trip.tripName}
+          </CardTitle>
           <CardDescription className="flex items-center gap-1 text-gray-500">
             <Calendar className="w-4 h-4" />
             <span>{trip.days} Days Journey</span>
@@ -78,11 +89,11 @@ export function TripCard({ trip, tripName, rec }) {
           </div>
         </CardContent>
         <CardFooter className="flex items-center justify-between pb-4">
-          <a href={trip.source} 
+          <button onClick={handleViewItinerary}
              className="group flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors">
             View Full Itinerary
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </a>
+          </button>
         </CardFooter>
       </Card>
     )
